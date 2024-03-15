@@ -19,8 +19,8 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     MhsEntity getUserByEmail(@Param("email") String email);
 
     // Check Email Udah dipakai apa belum
-    @Query("SELECT COUNT(u.email) > 0 from MhsEntity where u.email = :email")
+    @Query("SELECT COUNT(u.email) > 0 from MhsEntity u where u.email = :email")
     Boolean isEmailExist(@Param("email") String email);
-    @Query("SELECT count(e.phoneNumber) <= 2 from  MhsEntity WHERE e.phoneNumber = :phoneNumber")
+    @Query("SELECT count(e.phoneNumber) <= 2 from  MhsEntity e WHERE  e.phoneNumber = :phoneNumber")
     Boolean isPhoneNumberExist(@Param("phoneNumber") int phoneNumber);
 }
