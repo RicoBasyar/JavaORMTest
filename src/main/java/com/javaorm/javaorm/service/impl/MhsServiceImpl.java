@@ -21,21 +21,27 @@ public class MhsServiceImpl implements MhsService {
 
     @Override
     public Object Register(RegisterReqBody req) {
+        boolean isNimExist = mhsRepository.isNimExist(req.getNim());
+        if(isNimExist){
+            return "NIM Sudah Digunakan";
+        }
+
         Boolean isEmailExist = mhsRepository.isEmailExist(req.getEmail());
         if(isEmailExist){
             return "Email Sudah Digunakan";
         }
 
-        Boolean isPhoneNumberExist = mhsRepository.isPhoneNumberExist(req.getPhoneNumber());
+        Boolean isPhoneNumberExist = mhsRepository.isPhoneNumberExist(req.getNo_hp());
         if(isPhoneNumberExist){
-            return "Penggunakan Nomor HP Sudah Lebih dari 2";
+            return "Nomor HP Sudah Lebih dari 2";
         }
 
         try {
             MhsEntity mhsEntity = new MhsEntity();
             mhsEntity.setNim(req.getNim());
-            mhsEntity.setName(req.getName());
+            mhsEntity.setNama_mhs(req.getNama_mhs());
             mhsEntity.setEmail(req.getEmail());
+            mhsEntity.setNo_hp(req.getNo_hp());
 
             return mhsRepository.save(mhsEntity);
         }catch (Exception e){

@@ -18,9 +18,13 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     @Query("SELECT u FROM MhsEntity u where u.email = :email")
     MhsEntity getUserByEmail(@Param("email") String email);
 
+    // Check NIM Udah dipakai apa belum
+    @Query("SELECT COUNT(f.nim) > 0 from MhsEntity f where f.nim = :nim")
+    Boolean isNimExist(@Param("nim") String nim);
     // Check Email Udah dipakai apa belum
     @Query("SELECT COUNT(u.email) > 0 from MhsEntity u where u.email = :email")
     Boolean isEmailExist(@Param("email") String email);
-    @Query("SELECT count(e.phoneNumber) <= 2 from  MhsEntity e WHERE  e.phoneNumber = :phoneNumber")
-    Boolean isPhoneNumberExist(@Param("phoneNumber") int phoneNumber);
+    // Check Hp Udah dipakai apa belum
+    @Query("SELECT count(e.no_hp) >= 2 from MhsEntity e WHERE  e.no_hp = :no_hp")
+    Boolean isPhoneNumberExist(@Param("no_hp") int no_hp);
 }

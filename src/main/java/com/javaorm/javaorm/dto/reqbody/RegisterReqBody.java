@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RegisterReqBody {
     private String email;
-    private int phoneNumber;
-    private String name;
+    private int no_hp;
+    private String nama_mhs;
     private String nim;
 }
