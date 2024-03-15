@@ -11,5 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterReqBody {
-
+    private String email;
+    private int phoneNumber;
+    private String name;
+    private String nim;
 }
