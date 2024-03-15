@@ -25,7 +25,7 @@ public class MhsController {
                     .body(new BaseResponse<>(null, "Registration failed: " + e.getMessage()));
         }
     }
-
+//
     @GetMapping("user/{email}")
     public @ResponseBody ResponseEntity<BaseResponse<?>> getData(@PathVariable String email){
         Object getData = service.getMhsDataByEmail(email);
