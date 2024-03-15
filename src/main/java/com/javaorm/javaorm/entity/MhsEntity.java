@@ -22,10 +22,10 @@ public class MhsEntity {
     private String nim;
 
     @Column(name = "nama_mhs")
-    private String name;
+    private String nama_mhs;
 
     @Column(name = "no_hp")
-    private int phoneNumber;
+    private int no_hp;
 
     @Column(name = "email")
     private String email;
