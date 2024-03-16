@@ -1,6 +1,7 @@
 package com.javaorm.javaorm.service.impl;
 
-import com.javaorm.javaorm.dto.reqbody.RegisterReqBody;
+import com.javaorm.javaorm.dto.reqbody.mhs.RegisterReqBody;
+import com.javaorm.javaorm.dto.reqbody.mhs.UpdateReqBody;
 import com.javaorm.javaorm.entity.MhsEntity;
 import com.javaorm.javaorm.repository.MhsRepository;
 import com.javaorm.javaorm.service.MhsService;
@@ -47,5 +48,29 @@ public class MhsServiceImpl implements MhsService {
         }catch (Exception e){
             return e;
         }
+    }
+
+    @Override
+    public Object Delete(String nim){
+        return mhsRepository.deleteByNim(nim);
+    }
+
+    @Override
+    public Object update(String nim, UpdateReqBody req){
+        MhsEntity mhsEntity = mhsRepository.getNim(nim);
+
+        if(mhsEntity == null){
+            return "Data Tidak ada";
+        }
+        if(mhsEntity.getEmail().equals(req.getEmail())){
+            return "Email sudah digunakan";
+        }
+        if(mhsEntity.getNama_mhs().equals(req.getNama_mhs())){
+            return "Nama sudah digunakan";
+        }
+
+        mhsEntity.setNama_mhs(req.getNama_mhs());
+        mhsEntity.setEmail(req.getEmail());
+        return mhsRepository.save(mhsEntity);
     }
 }
