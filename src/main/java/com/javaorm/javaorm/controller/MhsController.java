@@ -45,7 +45,7 @@ public class MhsController {
     }
 
     @PutMapping("user/update/{nim}")
-    public @ResponseBody ResponseEntity<BaseResponse<?>> updateData(@Validated @PathVariable @RequestBody String nim, UpdateReqBody req){
+    public @ResponseBody ResponseEntity<BaseResponse<?>> updateData(@Validated @PathVariable String nim, @RequestBody UpdateReqBody req){
         try{
             Object updateData = service.update(nim, req);
             return ResponseEntity.ok(new BaseResponse<>(null,updateData));
