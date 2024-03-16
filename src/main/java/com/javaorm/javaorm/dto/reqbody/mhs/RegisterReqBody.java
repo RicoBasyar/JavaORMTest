@@ -1,6 +1,5 @@
-package com.javaorm.javaorm.dto.reqbody;
+package com.javaorm.javaorm.dto.reqbody.mhs;
 
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

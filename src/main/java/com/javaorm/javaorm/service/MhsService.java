@@ -1,6 +1,7 @@
 package com.javaorm.javaorm.service;
 
-import com.javaorm.javaorm.dto.reqbody.RegisterReqBody;
+import com.javaorm.javaorm.dto.reqbody.mhs.RegisterReqBody;
+import com.javaorm.javaorm.dto.reqbody.mhs.UpdateReqBody;
 import com.javaorm.javaorm.entity.MhsEntity;
 
 public interface MhsService {
@@ -8,4 +9,6 @@ public interface MhsService {
     Object Register(RegisterReqBody req);
     Object Delete(String nim);
     MhsEntity getMhsDataByEmail(String email);
+
+    Object update(String nim, UpdateReqBody req);
 }

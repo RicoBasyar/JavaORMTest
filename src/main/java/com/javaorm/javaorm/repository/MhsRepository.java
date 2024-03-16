@@ -15,6 +15,10 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     Optional<MhsEntity> findByEmail(String email);
     Optional<MhsEntity> deleteByNim(String nim);
 
+    //Get Nim
+    @Query("select n from MhsEntity n where n.nim = :nim")
+    MhsEntity getNim(@Param("nim") String nim);
+
     // Get Data User
     @Query("SELECT u FROM MhsEntity u where u.email = :email")
     MhsEntity getUserByEmail(@Param("email") String email);
