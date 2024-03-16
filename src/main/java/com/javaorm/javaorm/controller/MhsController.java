@@ -31,4 +31,15 @@ public class MhsController {
         Object getData = service.getMhsDataByEmail(email);
         return ResponseEntity.ok(new BaseResponse<>(null, getData));
     }
+
+    @DeleteMapping("user/delete/{nim}")
+    public @ResponseBody ResponseEntity<BaseResponse<?>> deleteData(@PathVariable @RequestBody String nim){
+        try{
+            Object deleteData = service.Delete(nim);
+            return ResponseEntity.ok(new BaseResponse<>(null, deleteData));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseResponse<>(null, "Delete data error" + e.getMessage()));
+        }
+    }
 }

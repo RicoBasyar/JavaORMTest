@@ -48,4 +48,9 @@ public class MhsServiceImpl implements MhsService {
             return e;
         }
     }
+
+    @Override
+    public Object Delete(String nim){
+        return mhsRepository.deleteByNim(nim);
+    }
 }

@@ -13,10 +13,12 @@ import java.util.Optional;
 @EnableJpaRepositories
 public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     Optional<MhsEntity> findByEmail(String email);
+    Optional<MhsEntity> deleteByNim(String nim);
 
     // Get Data User
     @Query("SELECT u FROM MhsEntity u where u.email = :email")
     MhsEntity getUserByEmail(@Param("email") String email);
+
 
     // Check NIM Udah dipakai apa belum
     @Query("SELECT COUNT(f.nim) > 0 from MhsEntity f where f.nim = :nim")
