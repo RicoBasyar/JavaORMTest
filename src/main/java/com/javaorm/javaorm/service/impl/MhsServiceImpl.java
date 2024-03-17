@@ -55,6 +55,7 @@ public class MhsServiceImpl implements MhsService {
         return mhsRepository.deleteByNim(nim);
     }
 
+    // Keknya bisa disederhanain
     @Override
     public Object update(String nim, UpdateReqBody req){
         MhsEntity mhsEntity = mhsRepository.getNim(nim);
