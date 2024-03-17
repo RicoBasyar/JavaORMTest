@@ -55,6 +55,7 @@ public class MhsServiceImpl implements MhsService {
         return mhsRepository.deleteByNim(nim);
     }
 
+    // Keknya bisa disederhanain
     @Override
     public Object update(String nim, UpdateReqBody req){
         MhsEntity mhsEntity = mhsRepository.getNim(nim);
@@ -69,8 +70,16 @@ public class MhsServiceImpl implements MhsService {
             return "Nama sudah digunakan";
         }
 
-        mhsEntity.setNama_mhs(req.getNama_mhs());
-        mhsEntity.setEmail(req.getEmail());
+        if(req.getNama_mhs() == null){
+            mhsEntity.setNama_mhs(mhsEntity.getNama_mhs());
+            mhsEntity.setEmail(req.getEmail());
+        }
+
+        if(req.getEmail() == null){
+            mhsEntity.setEmail(mhsEntity.getEmail());
+            mhsEntity.setNama_mhs(req.getNama_mhs());
+        }
+
         return mhsRepository.save(mhsEntity);
     }
 }
