@@ -69,8 +69,16 @@ public class MhsServiceImpl implements MhsService {
             return "Nama sudah digunakan";
         }
 
-        mhsEntity.setNama_mhs(req.getNama_mhs());
-        mhsEntity.setEmail(req.getEmail());
+        if(req.getNama_mhs() == null){
+            mhsEntity.setNama_mhs(mhsEntity.getNama_mhs());
+            mhsEntity.setEmail(req.getEmail());
+        }
+
+        if(req.getEmail() == null){
+            mhsEntity.setEmail(mhsEntity.getEmail());
+            mhsEntity.setNama_mhs(req.getNama_mhs());
+        }
+
         return mhsRepository.save(mhsEntity);
     }
 }
