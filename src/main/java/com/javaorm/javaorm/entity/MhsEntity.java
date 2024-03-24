@@ -1,5 +1,6 @@
 package com.javaorm.javaorm.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,6 +23,7 @@ public class MhsEntity {
     private String nim;
 
     @Column(name = "nama_mhs")
+    @JsonProperty("namamhs")
     private String nama_mhs;
 
     @Column(name = "no_hp")
