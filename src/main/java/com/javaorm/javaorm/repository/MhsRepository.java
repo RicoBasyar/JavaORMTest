@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
 import java.util.Optional;
 
 @Repository
@@ -14,6 +15,9 @@ import java.util.Optional;
 public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     Optional<MhsEntity> findByEmail(String email);
     Optional<MhsEntity> deleteByNim(String nim);
+
+    @Query("select a from MhsEntity a")
+    Optional<MhsEntity> findUsers(Pageable page);
 
     //Get Nim
     @Query("select n from MhsEntity n where n.nim = :nim")

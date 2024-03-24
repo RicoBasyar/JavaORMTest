@@ -1,5 +1,6 @@
 package com.javaorm.javaorm.controller;
 
+import com.javaorm.javaorm.dto.reqbody.mhs.RegisterBulkReqBody;
 import com.javaorm.javaorm.dto.reqbody.mhs.RegisterReqBody;
 import com.javaorm.javaorm.dto.reqbody.mhs.UpdateReqBody;
 import com.javaorm.javaorm.dto.resbody.BaseResponse;
@@ -10,14 +11,33 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
+import java.util.logging.Logger;
+
 @RestController
 public class MhsController {
+
+    private static final Logger LOGGER = Logger.getLogger("MhsController");
 
     @Autowired
     private MhsService service;
 
+    @PostMapping("/register/bulk")
+    public @ResponseBody ResponseEntity<BaseResponse<?>> registerBulk (@Validated @RequestBody RegisterBulkReqBody req){
+        LOGGER.info("Dari Response" + req.getList().get(0).getNama_mhs());
+
+        try{
+            Object mhs = service.RegisterBulk(req);
+            return ResponseEntity.ok(new BaseResponse<>(null, mhs));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseResponse<>(null, "Registration failed: " + e.getMessage()));
+        }
+    }
+
     @PostMapping("/register")
     public @ResponseBody ResponseEntity<BaseResponse<?>> register (@Validated @RequestBody RegisterReqBody req){
+        LOGGER.info("Dari Response" + req.getNama_mhs());
+
         try{
             Object mhs = service.Register(req);
             return ResponseEntity.ok(new BaseResponse<>(null, mhs));
@@ -27,6 +47,17 @@ public class MhsController {
         }
     }
 //
+    @GetMapping("users")
+    public @ResponseBody ResponseEntity<BaseResponse<?>> getDataUsers(){
+
+        try{
+            Object mhs = service.getUsers();
+            return ResponseEntity.ok(new BaseResponse<>(null, mhs));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseResponse<>(null, "Registration failed: " + e.getMessage()));
+        }
+    }
     @GetMapping("user/{email}")
     public @ResponseBody ResponseEntity<BaseResponse<?>> getData(@PathVariable String email){
         Object getData = service.getMhsDataByEmail(email);
