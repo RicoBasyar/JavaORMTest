@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.awt.print.Pageable;
 import java.util.Optional;
 
+//test
 @Repository
 @EnableJpaRepositories
 public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
