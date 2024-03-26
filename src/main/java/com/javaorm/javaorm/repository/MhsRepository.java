@@ -17,6 +17,7 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     Optional<MhsEntity> findByEmail(String email);
     Optional<MhsEntity> deleteByNim(String nim);
 
+    //get all user
     @Query("select a from MhsEntity a")
     Optional<MhsEntity> findUsers(Pageable page);
 
