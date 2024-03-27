@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 @EnableJpaRepositories
 public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
+    //get user by email
     Optional<MhsEntity> findByEmail(String email);
     Optional<MhsEntity> deleteByNim(String nim);
 
@@ -28,7 +29,6 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     // Get Data User
     @Query("SELECT u FROM MhsEntity u where u.email = :email")
     MhsEntity getUserByEmail(@Param("email") String email);
-
 
     // Check NIM Udah dipakai apa belum
     @Query("SELECT COUNT(f.nim) > 0 from MhsEntity f where f.nim = :nim")
