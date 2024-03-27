@@ -16,6 +16,7 @@ import java.util.Optional;
 public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     //get user by email
     Optional<MhsEntity> findByEmail(String email);
+    //delete user by nim
     Optional<MhsEntity> deleteByNim(String nim);
 
     //get all user
