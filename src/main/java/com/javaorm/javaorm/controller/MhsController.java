@@ -46,11 +46,10 @@ public class MhsController {
                     .body(new BaseResponse<>(null, "Registration failed: " + e.getMessage()));
         }
     }
-//
+
     @GetMapping("users")
     public @ResponseBody ResponseEntity<BaseResponse<?>> getDataUsers(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "5") Integer pageSize){
         try{
-
             return ResponseEntity.ok(new BaseResponse<>(null, service.getUsersNameOnly(pageNo, pageSize)));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -90,6 +89,16 @@ public class MhsController {
         try{
             Object updateData = service.update(nim, req);
             return ResponseEntity.ok(new BaseResponse<>(null,updateData));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseResponse<>(null, e.getMessage()));
+        }
+    }
+
+    @GetMapping("user/email")
+    public @ResponseBody ResponseEntity<BaseResponse<?>> getUsersEmailOnly(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "5") Integer pageSize){
+        try {
+            return ResponseEntity.ok(new BaseResponse<>(null, service.getAllEmailsOnly(pageNo, pageSize)));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new BaseResponse<>(null, e.getMessage()));

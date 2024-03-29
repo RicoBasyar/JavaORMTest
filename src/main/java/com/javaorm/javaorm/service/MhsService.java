@@ -15,6 +15,8 @@ public interface MhsService {
 
     List<MhsEntity> getUsersNameOnly(int pageNo, int pageSize);
 
+    List<MhsEntity> getAllEmailsOnly(int pageNo, int pageSize);
+
     Object RegisterBulk(RegisterBulkReqBody req);
     Object Delete(String nim);
     MhsEntity getMhsDataByEmail(String email);
