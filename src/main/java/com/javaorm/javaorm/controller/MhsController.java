@@ -48,14 +48,24 @@ public class MhsController {
     }
 //
     @GetMapping("users")
-    public @ResponseBody ResponseEntity<BaseResponse<?>> getDataUsers(){
-
+    public @ResponseBody ResponseEntity<BaseResponse<?>> getDataUsers(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "5") Integer pageSize){
         try{
-            Object mhs = service.getUsers();
-            return ResponseEntity.ok(new BaseResponse<>(null, mhs));
+
+            return ResponseEntity.ok(new BaseResponse<>(null, service.getUsersNameOnly(pageNo, pageSize)));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new BaseResponse<>(null, "Registration failed: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("user/mhsname")
+    public @ResponseBody ResponseEntity<BaseResponse<?>> getUserNameOnlyController(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "5") Integer pageSize){
+        try {
+            Object mhs = service.getUsersNameOnly(pageNo, pageSize);
+            return ResponseEntity.ok(new BaseResponse<>(null, mhs));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new BaseResponse<>(null, "Registration Failed" + e.getMessage()));
         }
     }
     @GetMapping("user/{email}")

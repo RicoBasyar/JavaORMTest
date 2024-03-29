@@ -8,8 +8,8 @@ import com.javaorm.javaorm.repository.MhsRepository;
 import com.javaorm.javaorm.service.MhsService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -58,8 +58,16 @@ public class MhsServiceImpl implements MhsService {
     }
 
     @Override
-    public Object getUsers() {
-        return mhsRepository.findAll(Sort.by("nim").descending());
+    public Object getUsers(int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        return mhsRepository.findAll(pageRequest);
+    }
+
+    @Override
+    public List<MhsEntity> getUsersNameOnly(int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<MhsEntity> pagingMhs = mhsRepository.findUsersNameOnly(pageRequest);
+        return pagingMhs.getContent();
     }
 
     @Override

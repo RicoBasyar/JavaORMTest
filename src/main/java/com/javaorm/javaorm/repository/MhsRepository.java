@@ -1,6 +1,8 @@
 package com.javaorm.javaorm.repository;
 
 import com.javaorm.javaorm.entity.MhsEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -19,9 +21,10 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     //delete user by nim
     Optional<MhsEntity> deleteByNim(String nim);
 
-    //get all user
-    @Query("select a from MhsEntity a")
-    Optional<MhsEntity> findUsers(Pageable page);
+
+    //get mhs name
+    @Query("SELECT u.nama_mhs from MhsEntity u")
+    Page findUsersNameOnly(PageRequest page);
 
     //Get Nim
     @Query("select n from MhsEntity n where n.nim = :nim")
