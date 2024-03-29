@@ -71,6 +71,13 @@ public class MhsServiceImpl implements MhsService {
     }
 
     @Override
+    public List<MhsEntity> getAllEmailsOnly(int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page <MhsEntity> pagingEmail = mhsRepository.findDataEmailsOnly(pageRequest);
+        return pagingEmail.getContent();
+    }
+
+    @Override
     public Object RegisterBulk(RegisterBulkReqBody req) {
         List<MhsEntity> listMhsEntity = new ArrayList<>();
         for (int i = 0; i < req.getList().size(); i++) {

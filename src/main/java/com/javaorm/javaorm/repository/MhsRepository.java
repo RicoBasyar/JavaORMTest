@@ -3,13 +3,13 @@ package com.javaorm.javaorm.repository;
 import com.javaorm.javaorm.entity.MhsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
 import java.util.Optional;
 
 //test
@@ -25,6 +25,9 @@ public interface MhsRepository extends JpaRepository<MhsEntity, Integer> {
     //get mhs name
     @Query("SELECT u.nama_mhs from MhsEntity u")
     Page findUsersNameOnly(PageRequest page);
+
+    @Query("SELECT u.email from MhsEntity u")
+    Page findDataEmailsOnly(PageRequest page);
 
     //Get Nim
     @Query("select n from MhsEntity n where n.nim = :nim")
