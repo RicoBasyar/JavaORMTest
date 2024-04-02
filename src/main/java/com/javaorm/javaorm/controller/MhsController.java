@@ -94,7 +94,7 @@ public class MhsController {
                     .body(new BaseResponse<>(null, e.getMessage()));
         }
     }
-
+// test
     @GetMapping("user/email")
     public @ResponseBody ResponseEntity<BaseResponse<?>> getUsersEmailOnly(@RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "5") Integer pageSize){
         try {
